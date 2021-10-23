@@ -76,10 +76,15 @@ header {
   display: none !important;
 }
 
-.menu-wrapper {
+.nav-wrapper {
+  width: 100%;
+}
+
+.menu-list-wrapper {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  width: 100%;
   height: 100%;
 }
 
@@ -98,6 +103,10 @@ header {
 .menu-link a:hover {
   background-color: var(--color-light-accent-lightgrey);
   border-radius: 10%;
+}
+
+.menu-link:nth-child(2) {
+  margin-left: auto;
 }
 
 /* 

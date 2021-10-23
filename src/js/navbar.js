@@ -11,11 +11,10 @@ const navItems = {
 };
 
 function createNavbar(parentKey, navItemsObj) {
-  createAndAttach(parentKey, 'nav', 'nav-wrapper');
+  createAndAttach(parentKey, 'nav', 'nav-wrapper', 'nav-wrapper');
   createNavList('nav-wrapper', navItemsObj);
 }
 
-//$
 createNavbar('header', navItems);
 
 // Create sub nav function takes parentKey, subItemsObj.
@@ -32,7 +31,7 @@ function createAndAttach(parentKey, el, elKey, elClass) {
   const item = document.createElement(el);
   const parent = document.querySelector(`[data-key=${parentKey}]`);
   item.setAttribute('data-key', elKey);
-  item.classList.add(elClass);
+  elClass ? item.classList.add(elClass) : null;
   parent.appendChild(item);
 }
 
@@ -41,7 +40,7 @@ function createAndAttach(parentKey, el, elKey, elClass) {
 function createNavList(parent, list) {
   console.log('param: list in createnavList ', list);
   const ul = document.createElement('ul');
-  ul.classList.add('menu-wrapper');
+  ul.classList.add('menu-list-wrapper');
   for (let prop in list) {
     console.log('param: prop in for..in loop at createNavList');
     const li = document.createElement('li');
@@ -74,78 +73,4 @@ const subNavItems = {
   kerem: ['Kerem Zopcuk', 'https://keremz.de'],
 };
 
-function setActiveMenuItem(elements, e) {
-  console.log('setActivemenuItems working');
-  console.log('e target', e.target);
-  elements.forEach((item) => {
-    if (e.target === item) {
-      item.classList.add('item-active');
-    } else {
-      item.classList.remove('item-active');
-    }
-  });
-}
-
-(function addEventOnMenuItems() {
-  const elements = document.querySelectorAll('.menu-link');
-  console.log('elements: ', elements);
-  console.log('AddEventOnMenuItems working...');
-  elements.forEach((element) =>
-    element.addEventListener('click', (e) => {
-      setActiveMenuItem(elements, e);
-    })
-  );
-})();
-
-function createSubNav(parentLi) {
-  parentLi.classList.add('has-subnav');
-  const nav = document.createElement('nav');
-  nav.classList.add('dropdown-wrapper', 'hidden');
-  createSubNavItems(nav);
-  toggleHidden(parentLi, nav);
-  parentLi.appendChild(nav);
-}
-
-// function appendSubnavIcon(parentLi) {
-//   const parentItemSpan = parentLi.getElementsByTagName('span')[0];
-//   const subNavIcon = document.createElement('span');
-//   subNavIcon.classList.add('subnav-icon');
-//   subNavIcon.innerText = '>';
-//   parentItemSpan.insertAdjacentElement('afterend', subNavIcon);
-// }
-
-function createSubNavItems(parentNav) {
-  const itemPlaceHolders = [
-    'Lorem',
-    'Ipsum Monc',
-    'Dior',
-    'Sit Mencu onte',
-    'Amenc',
-  ];
-  for (let i = 0; i < itemPlaceHolders.length; i++) {
-    const item = document.createElement('a');
-    item.innerText =
-      itemPlaceHolders[Math.floor(Math.random() * itemPlaceHolders.length)];
-    item.href = '#';
-    parentNav.appendChild(item);
-  }
-}
-
-function toggleHidden(parentLi, nav) {
-  parentLi.addEventListener('click', () => {
-    nav.classList.toggle('hidden');
-    parentLi.classList.toggle('dropdown-parent');
-  });
-}
-
-// Chose any menu link to add a sub navbar
-// createSubNav(document.getElementsByClassName('menu-link')[3]);
-
-//// Home Subnav creator functions
-// function selectToAddSubnav() {
-// Select all nav items
-// Check if an item has already nav
-//   const button = document.getElementById('navar-generator');
-// }
-
-export { createSubNav };
+export { createNavbar };
