@@ -1,1 +1,1 @@
-import { attachSubNav } from './navbar.js';
+import { createSubNav } from './navbar.js';

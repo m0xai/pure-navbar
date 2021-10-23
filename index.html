@@ -8,10 +8,11 @@
   <link rel="stylesheet" href="/src/css/main.css">
   <script defer type="module" src="/src/js/main.js"></script>
 </head>
+<!-- End of the Head part of site -->
 
 <body>
-  <header>
-    <span class="site-name">Site Name</span>
+  <header data-key="header">
+    <!-- <span class="site-name">Site Name</span>
     <nav class="menu-ul">
       <a class="menu-link" href="#"><span>Home</span></a>
       <a class="menu-link" href="#"><span>About</span></a>
@@ -19,16 +20,24 @@
       <a class="menu-link" href="#"><span>Karierre</span></a>
       <a class="menu-link" href="#"><span>Contact</span></a>
       <a class="menu-link" href="#"><span>Configure Nav</span></a>
-      <!-- Add Sticky nav or normal nav button
-      Add Dark mode button
-      -->
-    </nav>
+
+      // TODO 1. Add Sticky nav or normal nav button
+      // TODO 2. Add Dark mode button
+      // TODO 3. Show new codes under the menu.
+    </nav> -->
+
   </header>
   <!-- After Header -->
+
   <main>
-    <section id="hero-wrapper"></section>
+    <section id="hero-wrapper">
+      <select name="choose-nav" id="choose-nav">Chose a nav
+      </select>
+      <button id="navbar-generator">Add Navbar</button>
+    </section>
     <section id="gallery-wrapper"></section>
   </main>
+
 </body>
 
 </html>
