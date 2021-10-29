@@ -102,7 +102,7 @@ header {
 
 .menu-link a:hover {
   background-color: var(--color-light-accent-lightgrey);
-  border-radius: 10%;
+  border-radius: 5%;
 }
 
 .menu-link:nth-child(2) {
@@ -125,6 +125,12 @@ header {
   margin-left: 0.25rem;
 }
 */
+
+.subnav-wrapper {
+  display: none;
+  position: absolute;
+  background-color: var(--color-light-white);
+}
 
 /* TODO: Activate it when onclick Dropdown Parent */
 .dropdown-parent {
