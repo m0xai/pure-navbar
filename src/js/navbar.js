@@ -21,7 +21,7 @@ const subNavItems = {
 
 function createNavbar(parentKey, navItemsObj) {
   createAndAttach(parentKey, 'nav', 'nav-wrapper', 'nav-wrapper');
-  createNavList('nav-wrapper', navItemsObj);
+  createNavList('nav-wrapper', navItemsObj, 'parent');
 }
 
 createNavbar('header', navItems);
@@ -32,7 +32,7 @@ createNavbar('header', navItems);
 //! Call this only if there should be a sub nav element
 // Subnavkey can be anything
 function createSubNav(parentKey, subItemsObj) {
-  createSubNavList(parentKey, subItemsObj);
+  createNavList(parentKey, subItemsObj, 'child');
 }
 
 createSubNav('blog', subNavItems);
@@ -50,7 +50,6 @@ function createSubNavList(parent, list) {
   const parentEl = getELFromKey(parent);
   const ul = document.createElement('ul');
   ul.classList.add('subnav-wrapper');
-  addListener(parentEl, ul);
 
   for (let prop in list) {
     const li = document.createElement('li');
@@ -81,10 +80,16 @@ function toggleDisplay(sub) {
 //* Helper Function: create nav ul list. This can be merge with createAndAttach. But it should stay maintainable
 // return a list object of html elements
 //TODO: Divide this to new under functions like: createNavList_li
-function createNavList(parent, list) {
-  console.log('param: list in createnavList ', list);
+function createNavList(parent, list, type) {
+  const parentEl = getELFromKey(parent);
   const ul = document.createElement('ul');
-  ul.classList.add('menu-list-wrapper');
+  // spare items of their type
+  if (type === 'parent') ul.classList.add('menu-list-wrapper');
+  if (type === 'child') {
+    parentEl.classList.add('dropdown-parent');
+    ul.classList.add('subnav-wrapper');
+    addListener(parentEl, ul);
+  }
   for (let prop in list) {
     console.log('param: prop in for..in loop at createNavList');
     const li = document.createElement('li');
@@ -96,8 +101,7 @@ function createNavList(parent, list) {
     li.appendChild(a);
     ul.appendChild(li);
   }
-  getELFromKey(parent).appendChild(ul);
-  console.log('Ul item generated in createNavList: ', ul);
+  parentEl.appendChild(ul);
 }
 //* Helper Function: Get item from given data attribute value
 function getELFromKey(key) {
