@@ -1,3 +1,10 @@
+/*
+TODO:  Add a div to toggle navbar items when with under 768px;
+- Add z-index to stay in foreground
+- Position absolute to make independ
+
+*/
+
 @import url("helper.css");
 
 .hidden {
@@ -43,6 +50,10 @@
 }
 
 /* Seperate site name and other elements */
+.menu-list-wrapper > li:first-child {
+  font-weight: bold;
+}
+
 .menu-link:nth-child(2) {
   margin-left: auto;
 }
@@ -51,6 +62,8 @@
   display: none;
   position: absolute;
   background-color: var(--color-light-white);
+  box-shadow: 0px 10px 20px 0px var(--color-grey95);
+  z-index: 1;
 }
 
 .has-subnav::before {
@@ -58,6 +71,7 @@
   display: inline-block;
   position: absolute;
   top: 0.6rem;
+  left: 0;
   height: 10px;
   width: 10px;
   border-radius: 50%;
@@ -69,4 +83,39 @@
 .has-subnav:hover::before {
   filter: brightness(1.3);
   background-color: var(--color-light-blue);
+}
+
+@media (max-width: 768px) {
+  [data-key="header"] {
+    height: unset;
+  }
+
+  .nav-wrapper {
+    position: relative;
+    top: 0;
+  }
+
+  .menu-list-wrapper {
+    flex-direction: column;
+  }
+
+  .menu-list-wrapper a,
+  .menu-list-wrapper li,
+  .menu-list-wrapper ul {
+    width: 100%;
+  }
+
+  .menu-link:nth-child(2) {
+    margin-left: unset;
+  }
+
+  .menu-link a {
+    padding: 0.75rem;
+  }
+
+  .has-subnav::before {
+    position: relative;
+    left: -0.5rem;
+    top: 0;
+  }
 }
