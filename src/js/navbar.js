@@ -1,6 +1,3 @@
-//TODO: Create function to add Subnav
-//TODO: fix future style issues with items of primary nav and sub nav.
-
 // Use this placeholder object to create nav elements
 const navItems = {
   siteName: ['My Website', '/'],
@@ -46,35 +43,22 @@ function createAndAttach(parentKey, el, elKey, elClass) {
   parent.appendChild(item);
 }
 
-function createSubNavList(parent, list) {
-  const parentEl = getELFromKey(parent);
-  const ul = document.createElement('ul');
-  ul.classList.add('subnav-wrapper');
-
-  for (let prop in list) {
-    const li = document.createElement('li');
-    li.dataset.key = list[prop];
-    const link = document.createElement('a');
-    link.href = list[prop][1];
-    link.innerText = list[prop][0];
-    li.appendChild(link);
-    ul.appendChild(li);
-  }
-  parentEl.appendChild(ul);
-}
-
 function addListener(el, sub) {
   console.log('subdisp', sub.style.display);
   el.addEventListener('click', () => {
     console.log('hello');
-    toggleDisplay(sub);
+    toggleDisplay(el, sub);
   });
 }
 
-function toggleDisplay(sub) {
-  sub.style.display === 'none' || sub.style.display === ''
-    ? (sub.style.display = 'block')
-    : (sub.style.display = 'none');
+function toggleDisplay(el, sub) {
+  if (sub.style.display === 'none' || sub.style.display === '') {
+    sub.style.display = 'block';
+    el.style.backgroundColor = 'white';
+  } else {
+    sub.style.display = 'none';
+    el.style.backgroundColor = 'unset';
+  }
 }
 
 //* Helper Function: create nav ul list. This can be merge with createAndAttach. But it should stay maintainable
@@ -86,7 +70,7 @@ function createNavList(parent, list, type) {
   // spare items of their type
   if (type === 'parent') ul.classList.add('menu-list-wrapper');
   if (type === 'child') {
-    parentEl.classList.add('dropdown-parent');
+    parentEl.classList.add('has-subnav');
     ul.classList.add('subnav-wrapper');
     addListener(parentEl, ul);
   }
